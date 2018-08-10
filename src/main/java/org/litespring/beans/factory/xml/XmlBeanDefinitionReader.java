@@ -8,6 +8,7 @@ import org.litespring.beans.BeanDefinition;
 import org.litespring.beans.factory.BeanDefinitionStoreException;
 import org.litespring.beans.factory.support.BeanDefinitionRegistry;
 import org.litespring.beans.factory.support.GenericBeanDefinition;
+import org.litespring.core.io.Resource;
 import org.litespring.util.ClassUtils;
 
 import java.io.IOException;
@@ -24,13 +25,12 @@ public class XmlBeanDefinitionReader {
         this.beanDefinitionRegistry = beanDefinitionRegistry;
     }
 
-    public void loadBeanDefinition(String configFile) {
+    public void loadBeanDefinition(Resource resource) {
         InputStream inputStream = null;
-        ClassLoader classLoader = ClassUtils.getDefaultClassLoader();
-        inputStream = classLoader.getResourceAsStream(configFile);
 
         SAXReader saxReader = new SAXReader();
         try {
+            inputStream = resource.getInputStream();
             Document document = saxReader.read(inputStream);
             Element root = document.getRootElement();
             Iterator<Element> elementIterator = root.elementIterator();
@@ -42,8 +42,8 @@ public class XmlBeanDefinitionReader {
                 BeanDefinition beanDefinition = new GenericBeanDefinition(beanId, beanClassName);
                 this.beanDefinitionRegistry.registerBeanDefinition(beanId, beanDefinition);
             }
-        } catch (DocumentException e) {
-            throw new BeanDefinitionStoreException("parse xml fail");
+        } catch (Exception e) {
+            throw new BeanDefinitionStoreException("IOException parsing XML document from " + resource.getDescription());
         } finally {
             if (inputStream != null) {
                 try {
