@@ -18,6 +18,7 @@ import java.util.Iterator;
 public class XmlBeanDefinitionReader {
     private static final String ID_ATTRIBUTE = "id";
     private static final String CLASS_ATTRIBUTE = "class";
+    private static final String SCOPE_ATTRIBUTE = "scope";
 
     private BeanDefinitionRegistry beanDefinitionRegistry;
 
@@ -38,8 +39,10 @@ public class XmlBeanDefinitionReader {
                 Element element = elementIterator.next();
                 String beanId = element.attributeValue(ID_ATTRIBUTE);
                 String beanClassName = element.attributeValue(CLASS_ATTRIBUTE);
-
                 BeanDefinition beanDefinition = new GenericBeanDefinition(beanId, beanClassName);
+                if (element.attribute(SCOPE_ATTRIBUTE) != null) {
+                    beanDefinition.setScope(element.attributeValue(SCOPE_ATTRIBUTE));
+                }
                 this.beanDefinitionRegistry.registerBeanDefinition(beanId, beanDefinition);
             }
         } catch (Exception e) {
