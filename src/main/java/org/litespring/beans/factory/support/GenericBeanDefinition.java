@@ -15,17 +15,23 @@ public class GenericBeanDefinition implements BeanDefinition {
     private String scope = SCOPE_DEFAULT;
 
     List<PropertyValue> propertyValueList = new ArrayList<PropertyValue>();
-
     private ConstructorArgument constructorArgument = new ConstructorArgument();
 
     public GenericBeanDefinition(String id, String beanClassName) {
         this.id = id;
         this.beanClassName = beanClassName;
     }
+    public GenericBeanDefinition() {
+
+    }
 
     @Override
     public String getBeanClassName() {
         return this.beanClassName;
+    }
+
+    public void setBeanClassName(String className){
+        this.beanClassName = className;
     }
 
     @Override
@@ -63,6 +69,10 @@ public class GenericBeanDefinition implements BeanDefinition {
     @Override
     public String getID() {
         return this.id;
+    }
+
+    public void setId(String id){
+        this.id = id;
     }
 
     @Override
