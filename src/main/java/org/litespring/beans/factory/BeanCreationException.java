@@ -13,4 +13,8 @@ public class BeanCreationException extends BeansException {
     public BeanCreationException(String s, Exception e) {
         super(s);
     }
+
+    public BeanCreationException(String s, Throwable ex) {
+        super(s, ex);
+    }
 }
