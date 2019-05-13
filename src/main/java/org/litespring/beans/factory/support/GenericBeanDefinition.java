@@ -14,6 +14,8 @@ public class GenericBeanDefinition implements BeanDefinition {
     private boolean singleton = true;
     private boolean prototype = false;
     private String scope = SCOPE_DEFAULT;
+    //表明这个Bean定义是不是我们litespring自己合成的。
+    private boolean isSynthetic = false;
 
     List<PropertyValue> propertyValueList = new ArrayList<PropertyValue>();
     private ConstructorArgument constructorArgument = new ConstructorArgument();
@@ -22,8 +24,22 @@ public class GenericBeanDefinition implements BeanDefinition {
         this.id = id;
         this.beanClassName = beanClassName;
     }
+
     public GenericBeanDefinition() {
 
+    }
+
+    public GenericBeanDefinition(Class<?> clz) {
+        this.beanClass = clz;
+        this.beanClassName = clz.getName();
+    }
+
+    @Override
+    public boolean isSynthetic() {
+        return isSynthetic;
+    }
+    public void setSynthetic(boolean isSynthetic) {
+        this.isSynthetic = isSynthetic;
     }
 
     @Override
@@ -105,4 +121,6 @@ public class GenericBeanDefinition implements BeanDefinition {
     public boolean hasBeanClass(){
         return this.beanClass != null;
     }
+
+
 }

@@ -8,6 +8,7 @@ public class PetStoreService {
     private ItemDao itemDao;
     private String owner;
     private int version;
+    private String test;
 
     public String getOwner() {
         return owner;
@@ -39,5 +40,13 @@ public class PetStoreService {
 
     public void setItemDao(ItemDao itemDao) {
         this.itemDao = itemDao;
+    }
+
+    public String getTest() {
+        return test;
+    }
+
+    public void setTest(String test) {
+        this.test = test;
     }
 }

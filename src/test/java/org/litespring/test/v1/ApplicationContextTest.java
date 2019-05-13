@@ -15,10 +15,10 @@ public class ApplicationContextTest {
         Assert.assertNotNull(petStoreService);
     }
 
-    @Test
-    public void getBean() {
-        ApplicationContext applicationContext = new FileSystemXmlApplicationContext("D:\\petstore-v1.xml");
-        PetStoreService petStoreService = (PetStoreService) applicationContext.getBean("petStore");
-        Assert.assertNotNull(petStoreService);
-    }
+//    @Test
+//    public void getBean() {
+//        ApplicationContext applicationContext = new FileSystemXmlApplicationContext("D:\\petstore-v1.xml");
+//        PetStoreService petStoreService = (PetStoreService) applicationContext.getBean("petStore");
+//        Assert.assertNotNull(petStoreService);
+//    }
 }
