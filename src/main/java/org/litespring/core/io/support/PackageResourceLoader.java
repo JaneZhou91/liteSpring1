@@ -91,7 +91,6 @@ public class PackageResourceLoader  {
 
 
     protected void doRetrieveMatchingFiles( File dir, Set<File> result) throws IOException {
-
         File[] dirContents = dir.listFiles();
         if (dirContents == null) {
             if (logger.isWarnEnabled()) {
@@ -100,7 +99,6 @@ public class PackageResourceLoader  {
             return;
         }
         for (File content : dirContents) {
-
             if (content.isDirectory() ) {
                 if (!content.canRead()) {
                     if (logger.isDebugEnabled()) {

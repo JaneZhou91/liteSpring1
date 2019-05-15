@@ -6,7 +6,6 @@ import java.util.List;
  * Created by qingge on 2019/4/27.
  */
 public class InjectionMetadata {
-
     private final Class<?> targetClass;
     private List<InjectionElement> injectionElements;
 

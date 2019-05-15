@@ -36,7 +36,6 @@ public class ConfigBeanDefinitionParser {
     private static final String ASPECT_NAME_PROPERTY = "aspectName";
 
     public BeanDefinition parse(Element element, BeanDefinitionRegistry registry) {
-
         List<Element> childElts = element.elements();
         for (Element elt: childElts) {
             String localName = elt.getName();
@@ -60,14 +59,12 @@ public class ConfigBeanDefinitionParser {
         String aspectId = aspectElement.attributeValue(ID);
         String aspectName = aspectElement.attributeValue(REF);
 
-
         List<BeanDefinition> beanDefinitions = new ArrayList<BeanDefinition>();
         List<RuntimeBeanReference> beanReferences = new ArrayList<RuntimeBeanReference>();
 
-
         List<Element> eleList = aspectElement.elements();
         boolean adviceFoundAlready = false;
-        for (int i=0;i<eleList.size();i++) {
+        for (int i=0; i<eleList.size(); i++) {
             Element ele = eleList.get(i);
             if (isAdviceNode(ele)) {
                 if (!adviceFoundAlready) {
@@ -88,8 +85,6 @@ public class ConfigBeanDefinitionParser {
             parsePointcut(pointcutElement, registry);
         }
 
-
-
     }
 
 
@@ -99,7 +94,6 @@ public class ConfigBeanDefinitionParser {
      * '{@code after-throwing}' or '{@code around}'.
      */
     private boolean isAdviceNode(Element ele) {
-
         String name = ele.getName();
         return (BEFORE.equals(name) || AFTER.equals(name) || AFTER_RETURNING_ELEMENT.equals(name) ||
                 AFTER_THROWING_ELEMENT.equals(name) || AROUND.equals(name));
@@ -203,7 +197,6 @@ public class ConfigBeanDefinitionParser {
 
         GenericBeanDefinition pointcutDefinition = null;
 
-
         //this.parseState.push(new PointcutEntry(id));
         pointcutDefinition = createPointcutDefinition(expression);
         //pointcutDefinition.setSource(parserContext.extractSource(pointcutElement));
@@ -216,7 +209,6 @@ public class ConfigBeanDefinitionParser {
             BeanDefinitionReaderUtils.registerWithGeneratedName(pointcutDefinition, registry);
 
         }
-
 
         return pointcutDefinition;
     }

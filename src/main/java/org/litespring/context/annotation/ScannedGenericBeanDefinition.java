@@ -8,9 +8,7 @@ import org.litespring.core.type.AnnotationMetadata;
  * Created by qingge on 2019/4/26.
  */
 public class ScannedGenericBeanDefinition extends GenericBeanDefinition implements AnnotatedBeanDefinition {
-
     private final AnnotationMetadata metadata;
-
 
     public ScannedGenericBeanDefinition(AnnotationMetadata metadata) {
         super();

@@ -11,7 +11,6 @@ public interface AnnotationMetadata extends ClassMetadata{
 
     Set<String> getAnnotationTypes();
 
-
     boolean hasAnnotation(String annotationType);
 
     AnnotationAttributes getAnnotationAttributes(String annotationType);

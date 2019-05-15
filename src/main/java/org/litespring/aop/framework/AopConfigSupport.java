@@ -34,8 +34,6 @@ public class AopConfigSupport implements AopConfig {
         return this.targetObject.getClass();
     }
 
-
-
     public void addInterface(Class<?> intf) {
         Assert.notNull(intf, "Interface must not be null");
         if (!intf.isInterface()) {

@@ -24,23 +24,17 @@ public class BeanDefinitionValueResolver {
         } else if (value instanceof BeanDefinition) {
             // Resolve plain BeanDefinition, without contained name: use dummy name.
             BeanDefinition bd = (BeanDefinition) value;
-
             String innerBeanName = "(inner bean)" + bd.getBeanClassName() + "#" +
                     Integer.toHexString(System.identityHashCode(bd));
-
             return resolveInnerBean(innerBeanName, bd);
-
         } else {
             return value;
         }
     }
 
     private Object resolveInnerBean(String innerBeanName, BeanDefinition innerBd) {
-
         try {
-
             Object innerBean = this.beanFactory.createBean(innerBd);
-
             if (innerBean instanceof FactoryBean) {
                 try {
                     return ((FactoryBean<?>)innerBean).getObject();
