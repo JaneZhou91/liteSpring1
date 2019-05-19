@@ -1,5 +1,7 @@
 package org.litespring.beans.factory.support;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.litespring.beans.BeanDefinition;
 import org.litespring.beans.BeansException;
 import org.litespring.beans.NoSuchBeanDefinitionException;
@@ -27,6 +29,8 @@ public class DefaultBeanFactory extends AbstractBeanFactory implements BeanDefin
 
     private ClassLoader beanClassLoader;
     private List<BeanPostProcessor> beanPostProcessors = new ArrayList<BeanPostProcessor>();
+
+    private static final Log logger = LogFactory.getLog(DefaultBeanFactory.class);
 
     public DefaultBeanFactory(){
     }
@@ -220,7 +224,15 @@ public class DefaultBeanFactory extends AbstractBeanFactory implements BeanDefin
     private List<String> getBeanIDsByType(Class<?> type) {
         List<String> result = new ArrayList<String>();
         for(String beanName :this.beanDefinitionMap.keySet()){
-            if(type.isAssignableFrom(this.getType(beanName))){
+            Class<?> beanClass = null;
+            try{
+                beanClass = this.getType(beanName);
+            }catch(Exception e){
+                logger.warn("can't load class for bean :"+beanName+", skip it.");
+                continue;
+            }
+
+            if((beanClass != null) && type.isAssignableFrom(beanClass)){
                 result.add(beanName);
             }
         }
